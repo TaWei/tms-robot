@@ -194,9 +194,9 @@ namespace RobotGUI {
 			// 
 			// coordsScrollBar
 			// 
-			this->coordsScrollBar->Location = System::Drawing::Point(670, 45);
+			this->coordsScrollBar->Location = System::Drawing::Point(681, 45);
 			this->coordsScrollBar->Name = L"coordsScrollBar";
-			this->coordsScrollBar->Size = System::Drawing::Size(31, 516);
+			this->coordsScrollBar->Size = System::Drawing::Size(20, 452);
 			this->coordsScrollBar->TabIndex = 5;
 			this->coordsScrollBar->Scroll += gcnew System::Windows::Forms::ScrollEventHandler(this, &inputGUI::coordsScrollBar_Scroll);
 			// 
