@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <msclr/marshal_cppstd.h>
+#include "extApi.h"
 
 namespace RobotGUI {
 
@@ -208,6 +209,7 @@ namespace RobotGUI {
 			this->execButton->TabIndex = 6;
 			this->execButton->Text = L"Execute";
 			this->execButton->UseVisualStyleBackColor = true;
+			this->execButton->Click += gcnew System::EventHandler(this, &inputGUI::execButton_Click);
 			// 
 			// coordsListLabel
 			// 
@@ -284,6 +286,16 @@ private: System::Void addCoords_Click(System::Object^  sender, System::EventArgs
 	}
 }
 private: System::Void coordsScrollBar_Scroll(System::Object^  sender, System::Windows::Forms::ScrollEventArgs^  e) {
+}
+private: System::Void execButton_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (xCoordList.empty() || yCoordList.empty() || zCoordList.empty()){
+		MessageBox::Show("No points to execute. Add points and try again.");
+	}
+	else{
+		//simxInt *x;
+		//if (clientID == -1) printf("failed");
+		//simxCreateDummy(125136136, 0.01f, NULL, x, simx_opmode_oneshot_wait);
+	}
 }
 };
 }

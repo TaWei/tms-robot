@@ -51,8 +51,9 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;NON_MATLAB_PARSING;MAX_EXT_API_CONNECTIONS=255;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>C:\Users\James\Documents\Visual Studio 2013\Projects\RobotGUI\RobotGUI\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -85,6 +86,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="extApi.c" />
+    <ClCompile Include="extApiCustom.c" />
+    <ClCompile Include="extApiPlatform.c" />
     <ClCompile Include="inputGUI.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -103,6 +107,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="extApi.h" />
+    <ClInclude Include="extApiCustom.h" />
+    <ClInclude Include="extApiInternal.h" />
+    <ClInclude Include="extApiPlatform.h" />
     <ClInclude Include="inputGUI.h">
       <FileType>CppForm</FileType>
     </ClInclude>

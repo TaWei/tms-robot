@@ -18,10 +18,31 @@
     <ClCompile Include="inputGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="extApi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="extApiCustom.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="extApiPlatform.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inputGUI.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extApi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extApiCustom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extApiInternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extApiPlatform.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
