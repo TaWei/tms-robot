@@ -4,6 +4,7 @@
 #include <fstream>
 #include <QFile>
 #include <QTextStream>
+#include "extApi.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

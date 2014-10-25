@@ -13,8 +13,15 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    extApi.c \
+    extApiCustom.c \
+    extApiPlatform.c
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    extApi.h \
+    extApiCustom.h \
+    extApiInternal.h \
+    extApiPlatform.h
 
 FORMS    += mainwindow.ui
