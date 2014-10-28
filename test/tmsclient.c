@@ -1,20 +1,26 @@
-/* BSD Standard Socket Programming Example - UNIX */
+﻿/* BSD Standard Socket Programming Example - UNIX */
 #include <stdio.h>
 #include <sys/types.h>
-#include <sys/socket.h>
+#ifdef __WIN32__
+# include <winsock2.h>
+#else
+# include <sys/socket.h>
+#endif
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #define SERV_TCP_PORT 59002
-#define SERV_HOST_ADDR "199.5.148.56"
+#define SERV_HOST_ADDR "127.0.0.1"
 #define MAXLINE 512
 int written(int fd, char *ptr, int nbytes);
 int readline(int fd, char *ptr, int maxlen);
 void str_cli(int sockfd);
 char *pname;
+
 int main(int argc, char *argv[])
 {
   int sockfd;
   struct sockaddr_in serv_addr;
+  char choice;
   
   pname = argv[0];
   
@@ -33,7 +39,20 @@ int main(int argc, char *argv[])
     printf("Client: Can’t Connect to the server\n");
   }
   else{
-    str_cli(sockfd);
+	printf("Connected. \n");
+	char choice = 'f';
+
+	while((choice != 'l') && (choice != 'r') && (choice != 'e')) {
+		printf("Choose Left or Right:"" \n");
+		printf("1. Left (l)\n");
+		printf("2. Right (r)\n");
+		printf("3. End (e)\n");
+		choice = getchar();
+	}
+
+	str_write (sockfd, &choice);
+
+    //str_cli(sockfd);
   }
   exit(0);
 }
@@ -48,17 +67,31 @@ void str_cli (int sockfd)
     if(written(sockfd, sendline, 126)!=126){
        printf("strcli:written error on sock\n");
       }
+      printf("Line 51: sockfd=%d, recvline=%s\n",sockfd,recvline);
       i = readline(sockfd, recvline, 126);
+      printf("Print 2 : Line 51: sockfd=%d, recvline=%s\n",sockfd,recvline);
   }
 }
+
+void str_write (int sockfd , char *ptr)
+{
+	char sendline[MAXLINE];
+	memset (sendline, ptr, 1);
+	if(written(sockfd, sendline, 1)!=1){
+       printf("strcli:written error on sock\n");
+    }
+}
+
 int readline(int fd, char *ptr, int maxlen)
 {
   int n, rc;
   char c;
+  //printf("readline start \n");
   for(n = 0; n < maxlen; n++){
      if((rc = read(fd, &c, 1)) == 1){
         *ptr++ = c;
-        if(c==’\n’){
+        printf("%c",c);
+        if(c=='\n'){
           break;
          }
          else if(rc== 0) {
@@ -71,12 +104,15 @@ int readline(int fd, char *ptr, int maxlen)
       }
    }
    else{
+   	 printf("read failed\n");
      return (-1);
    }
+   printf("\n");
   }
 *ptr = 0;
 return (n);
  }
+
 int written(int fd, char *ptr, int nbytes)
 {
   int nleft, nwritten;
