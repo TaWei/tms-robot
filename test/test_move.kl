@@ -1,0 +1,23 @@
+PROGRAM test_move
+VAR
+	length, I : INTEGER
+	p1 : XYZWPR
+	c : CONFIG
+	path1 : PATH
+	longueur : INTEGER
+	fichier1 : FILE
+BEGIN
+	CNV_STR_CONF('NUT,0,0,0',c,0)
+	p1 = POS(475,-190,375,-180,-90,0,c)
+	MOVE TO p1
+	length = PATH_LEN(path1)
+	longeur = 30
+	FOR I = length DOWNTO 1 DO
+		DELETE_NODE(path1,I,6)
+	ENDFOR
+	FOR I = 1 TO longeur DO
+		MOVE AXIS 4 BY 1
+		APPEND_NODE(path1,6)
+		path1[i].node_pos = CURPOS(4,1,1)
+	ENDFOR
+END test_move
