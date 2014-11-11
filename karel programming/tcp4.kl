@@ -26,21 +26,8 @@
 --    Modification history:
 --
 -------------------------------------------------------------------------------
-PROGRAM tcpserv3
--- %STACKSIZE = 4000
--- %NOLOCKGROUP
--- %NOPAUSE=ERROR+COMMAND+TPENABLE
--- %ENVIRONMENT uif
--- %ENVIRONMENT sysdef
--- %ENVIRONMENT memo
--- %ENVIRONMENT kclop
--- %ENVIRONMENT bynam
--- %ENVIRONMENT fdev
--- %ENVIRONMENT flbt
--- %INCLUDE klevccdf
--- %INCLUDE klevkeys
--- %INCLUDE klevkmsk
--------------------------------------------------------------------------------
+PROGRAM tcp4
+
 VAR
 	file_var : FILE
 	tmp_int  : INTEGER
@@ -53,59 +40,48 @@ VAR
 	c : CONFIG
 	path1 : PATH
 	longueur : INTEGER
-	fichier1 : FILE
 -------------------------------------------------------------------------------
 
 BEGIN
-
-
 	CNV_STR_CONF('NUT,0,0,0',c,0)
 	SET_FILE_ATR(file_var, ATR_IA)
 	SET_FILE_ATR(file_var, ATR_FIELD)
 	-- set the server port before doing a connect
 	SET_VAR(entry, '*SYSTEM*','$HOSTS_CFG[3].$SERVER_PORT',59002,status)
-	--WRITE('Connecting..',cr)
-	MSG_CONNECT('S3:',status) 
-	--WRITE('Connect Status = ',status,cr)
+	MSG_CONNECT('S3:',status)
 	IF status = 0 THEN
-	--
- -- Open S3:
-	--WRITE ('Opening',cr)
-	FOR tmp_int1 = 1 TO 2 DO
-	 OPEN FILE file_var ('rw','S3:')
-	 status = IO_STATUS(file_var)
-	 --WRITE (status,cr)
-	 IF status = 0 THEN
-	    -- write an integer
-	    FOR tmp_int = 1 TO 2 DO
-	       WRITE('Reading',cr)
-	       -- Read 10 bytes 
-	       BYTES_AHEAD(file_var, entry, status)
-	       --WRITE file_var ('hello')
-	       --WRITE(entry, status, cr)
-	       READ file_var (tmp_str)
-	       tmp_str1 = 'l'
-	       --status = IO_STATUS(file_var)
-	       --WRITE (status, cr)
-	       -- Write 10 bytes
-	       --WRITE ('hello', cr)
-	       --status = IO_STATUS(file_var)
-	       --WRITE (status, cr)
-	    ENDFOR
-	    CLOSE FILE file_var
-	 ENDIF
-	ENDFOR
-	--WRITE('Disconnecting..',cr)
-	--MSG_DISCO('S3:',status)
-	--WRITE('Done.',cr)
-	IF tmp_str1 = 'l'
-		THEN
-			p1 = POS(475,-190,375,-180,-90,0,c)
-			MOVE TO p1
-		ELSE
-			p2 = POS(499,121,480,180,-90,0,c)
-			MOVE TO p2
+		tmp_str = 'g'
+		WHILE (tmp_str <> 'e') DO
+			--FOR tmp_int1 = 1 TO 2 DO
+			 OPEN FILE file_var ('rw','S3:')
+			 status = IO_STATUS(file_var)
+			IF status = 0 THEN
+			    -- write an integer
+			    --FOR tmp_int = 1 TO 2 DO
+			       --WRITE('Reading',cr)
+			       -- Read 10 bytes 
+			       BYTES_AHEAD(file_var, entry, status)
+			       READ file_var (tmp_str::2)
+			       tmp_str1 = 'r'
+			    --ENDFOR
+			    CLOSE FILE file_var
+			ENDIF
+			--ENDFOR
+			IF tmp_str = 'l'
+				THEN
+					p1 = POS(280,440,211,22,-75,-150,c)
+					MOVE TO p1
+					--p2 = POS(499,121,480,180,-90,0,c)
+					--MOVE TO p2
+			ENDIF
+			IF tmp_str = 'r'
+				THEN
+					p2 = POS(-235,466,211,22,-75,-90,c)
+					MOVE TO p2
+					--p1 = POS(475,-190,375,-180,-90,0,c)
+					--MOVE TO p1
+			ENDIF
+		ENDWHILE
 	ENDIF
 
-	ENDIF
-END tcpserv3
+END tcp4
